@@ -142,27 +142,117 @@
     const CHUNK_SIZE = 20; // items per "load more"
     const loadedCounts = { morning:0, evening:0, general:0, search:0 };
     let currentSearchQuery = '';
-
-    /* ======== Fetch split JSON files and merge ======== */
+    
+    /* ======== Updated: Fetch JSON files from server ======== */
     async function loadAdhkarJson(){
       if (LargeAdhkarList.length) return LargeAdhkarList;
+      
       try{
-        const files = ['morning.json','evening.json','general.json'];
-        const promises = files.map(f => fetch(f).then(r => { if(!r.ok) throw new Error('فشل تحميل '+f); return r.json(); }));
+        // قائمة بأسماء الملفات مع مساراتها النسبية أو المطلقة
+        const filePaths = [
+          'morning.json',
+          'evening.json', 
+          'general.json'
+        ];
+        
+        // تحميل البيانات من الملفات الموجودة على السيرفر
+        const promises = filePaths.map(f => 
+          fetch(f)
+            .then(response => {
+              if(!response.ok) throw new Error(`فشل تحميل ${f}: ${response.status}`);
+              return response.json();
+            })
+            .catch(error => {
+              console.warn(`خطأ في تحميل ${f}:`, error);
+              // إرجاع هيكل فارغ في حالة عدم وجود الملف
+              return { entries: [] };
+            })
+        );
+        
         const results = await Promise.all(promises);
-        // each file structure: { entries: [ ... ] }
+        
+        // دمج النتائج
         LargeAdhkarList = [];
         results.forEach((res, idx) => {
           const entries = (res && res.entries) ? res.entries : [];
-          // ensure category field exists; keep as-is
+          // إضافة معلومات التصنيف إذا لم تكن موجودة
+          const category = filePaths[idx].replace('.json', '');
+          entries.forEach(entry => {
+            if (!entry.category) entry.category = category;
+          });
           LargeAdhkarList = LargeAdhkarList.concat(entries);
         });
+        
+        // إذا لم توجد بيانات، نستخدم بيانات افتراضية كبديل
+        if (LargeAdhkarList.length === 0) {
+          LargeAdhkarList = getDefaultAdhkarData();
+          showToast("تم تحميل بيانات افتراضية. تأكد من وجود ملفات JSON على السيرفر.", "info", 5000);
+        } else {
+          showToast(`تم تحميل ${LargeAdhkarList.length} ذكر بنجاح`, "success", 3000);
+        }
+        
         return LargeAdhkarList;
       } catch(e){
-        console.error(e);
-        showToast("تعذّر تحميل ملفات الأذكار. تأكد من وجود morning.json, evening.json, general.json", "warn", 6000);
-        return [];
+        console.error('خطأ في تحميل البيانات:', e);
+        // استخدام بيانات افتراضية في حالة الفشل
+        LargeAdhkarList = getDefaultAdhkarData();
+        showToast("تم تحميل البيانات الافتراضية. تحقق من ملفات JSON على السيرفر.", "warn", 6000);
+        return LargeAdhkarList;
       }
+    }
+    
+    /* ======== بيانات افتراضية في حالة عدم وجود ملفات ======== */
+    function getDefaultAdhkarData() {
+      return [
+        {
+          id: 1,
+          category: "morning",
+          text: "أصبحنا وأصبح الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير",
+          reference: "رواه مسلم",
+          benefit: "من قالها حين يصبح كان له أجر عتق رقبة، وحط عنه عشر خطيئات، ورفع له عشر درجات",
+          count: 1
+        },
+        {
+          id: 2,
+          category: "morning", 
+          text: "اللهم بك أصبحنا، وبك أمسينا، وبك نحيا، وبك نموت، وإليك النشور",
+          reference: "رواه الترمذي",
+          benefit: "من قالها حين يصبح فقد أدى شكر يومه",
+          count: 1
+        },
+        {
+          id: 3,
+          category: "evening",
+          text: "أمسينا وأمسى الملك لله، والحمد لله، لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير",
+          reference: "رواه مسلم",
+          benefit: "من قالها حين يمسي كان له أجر عتق رقبة، وحط عنه عشر خطيئات، ورفع له عشر درجات",
+          count: 1
+        },
+        {
+          id: 4,
+          category: "evening",
+          text: "اللهم بك أمسينا، وبك أصبحنا، وبك نحيا، وبك نموت، وإليك المصير",
+          reference: "رواه الترمذي",
+          benefit: "من قالها حين يمسي فقد أدى شكر ليلته",
+          count: 1
+        },
+        {
+          id: 5,
+          category: "general",
+          text: "سبحان الله وبحمده",
+          reference: "متفق عليه",
+          benefit: "من قالها مائة مرة غفرت ذنوبه ولو كانت مثل زبد البحر",
+          count: 100
+        },
+        {
+          id: 6,
+          category: "general",
+          text: "لا إله إلا الله وحده لا شريك له، له الملك وله الحمد وهو على كل شيء قدير",
+          reference: "رواه البخاري ومسلم",
+          benefit: "من قالها في يوم مائة مرة كانت له عدل عشر رقاب، وكتبت له مائة حسنة، ومحيت عنه مائة سيئة",
+          count: 100
+        }
+      ];
     }
 
     /* ======== Helper: get entries by category & optional search ======== */
@@ -187,6 +277,13 @@
       });
       AppState.dailyStats = { total, completed, date: getCurrentDateString() };
       Storage.save('daily_stats', AppState.dailyStats);
+      
+      // تحديث النسبة المئوية في الواجهة إذا كانت موجودة
+      const pct = total ? Math.round((completed / total) * 100) : 0;
+      const progressFill = document.querySelector('.progress-fill');
+      if(progressFill) {
+        progressFill.style.width = pct + '%';
+      }
     }
 
     /* ======== Daily reset ======== */
@@ -195,7 +292,8 @@
       const today = getCurrentDateString();
       if(AppState.lastResetDate !== today){
         Object.keys(AppState.adhkarHistory).forEach(id => {
-          AppState.adhkarHistory[id].current = 0; AppState.adhkarHistory[id].completed = false;
+          AppState.adhkarHistory[id].current = 0; 
+          AppState.adhkarHistory[id].completed = false;
         });
         AppState.dailyStats = { total:0, completed:0, date:today };
         AppState.lastResetDate = today;
@@ -233,7 +331,11 @@
         const disabled = AppState.adhkarHistory[id].completed;
         if(minus) minus.disabled = disabled;
         if(plus) plus.disabled = disabled;
-        if(completeBtn){ completeBtn.disabled = disabled; completeBtn.textContent = disabled ? 'مكتمل ✓' : 'إكمال'; }
+        if(completeBtn){ 
+          completeBtn.disabled = disabled; 
+          completeBtn.textContent = disabled ? 'مكتمل ✓' : 'إكمال'; 
+          completeBtn.style.backgroundColor = disabled ? '#2ecc71' : '';
+        }
       }
       if(AppState.currentTab === 'home') renderHome();
     }
@@ -253,7 +355,11 @@
         const completeBtn = el.querySelector('.btn-complete');
         if(minus) minus.disabled = true;
         if(plus) plus.disabled = true;
-        if(completeBtn){ completeBtn.disabled = true; completeBtn.textContent = 'مكتمل ✓'; }
+        if(completeBtn){ 
+          completeBtn.disabled = true; 
+          completeBtn.textContent = 'مكتمل ✓'; 
+          completeBtn.style.backgroundColor = '#2ecc71';
+        }
       } else {
         reloadCurrentTab();
       }
@@ -295,7 +401,7 @@
                     <div class="dhikr-reference">${d.reference || ''}</div>
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
                       <div class="counter-display">${st.current}/${d.count}</div>
-                      <button class="btn-primary" onclick="loadTab('${rec}')">الذهاب إلى ${label}</button>
+                      <button class="btn-primary" style="background:var(--primary);color:#000;padding:6px 12px;border-radius:6px;border:none;cursor:pointer;" onclick="loadTab('${rec}')">الذهاب إلى ${label}</button>
                     </div>
                   </div>`;
         });
@@ -309,8 +415,8 @@
       if(recent.length){
         recent.forEach(d => {
           html += `<div style="background:rgba(46,204,113,0.06);padding:10px;border-radius:8px;margin:8px 0;text-align:center;">
-                    <i class="fas fa-check-circle" style="color:var(--secondary,#2ecc71)"></i>
-                    <div style="margin-top:8px;">${d.text}</div>
+                    <i class="fas fa-check-circle" style="color:#2ecc71"></i>
+                    <div style="margin-top:8px;">${d.text.substring(0, 60)}...</div>
                   </div>`;
         });
       } else {
@@ -336,7 +442,10 @@
       if(start === 0){
         let headerHtml = `<div class="card"><div class="card-title"><i class="${icon}"></i> ${title}</div>`;
         headerHtml += `<div id="dhikr-list"></div>`;
-        headerHtml += `</div><div style="text-align:center;"><button id="loadMoreBtn" class="load-more">تحميل المزيد</button></div>`;
+        headerHtml += `</div>`;
+        if(totalAvailable > CHUNK_SIZE) {
+          headerHtml += `<div style="text-align:center;"><button id="loadMoreBtn" class="load-more">تحميل المزيد</button></div>`;
+        }
         content.innerHTML = headerHtml;
       }
 
@@ -358,7 +467,7 @@
           <div class="progress-bar"><div class="progress-fill" style="width:${percent}%;"></div></div>
           <div class="counter-controls">
             <button class="counter-btn btn-minus" onclick="updateDhikrCount(${item.id}, -1)" ${st.completed ? 'disabled' : ''}><i class="fas fa-minus"></i></button>
-            <button class="complete-btn btn-complete" onclick="completeDhikr(${item.id})" ${st.completed ? 'disabled' : ''}>${st.completed ? 'مكتمل ✓' : 'إكمال'}</button>
+            <button class="complete-btn btn-complete" onclick="completeDhikr(${item.id})" ${st.completed ? 'disabled' : ''} style="${st.completed ? 'background:#2ecc71;' : ''}">${st.completed ? 'مكتمل ✓' : 'إكمال'}</button>
             <button class="counter-btn btn-plus" onclick="updateDhikrCount(${item.id}, 1)" ${st.completed ? 'disabled' : ''}><i class="fas fa-plus"></i></button>
           </div>
         `;
@@ -377,6 +486,12 @@
           loadMoreBtn.onclick = () => renderCategory(category, title, icon);
         }
       }
+      
+      // إذا لم توجد نتائج
+      if(list.length === 0) {
+        const container = document.getElementById('dhikr-list') || content;
+        container.innerHTML += `<div class="empty"><i class="fas fa-info-circle"></i><p>لا توجد أذكار في هذا القسم</p></div>`;
+      }
     }
 
     function renderMorning(){ return renderCategory('morning','أذكار الصباح','fas fa-sun'); }
@@ -391,7 +506,12 @@
       // show results in general category view but filtered
       renderCategory('general','نتائج البحث','fas fa-search');
     }
-    function clearSearch(){ document.getElementById('searchInput').value=''; currentSearchQuery=''; loadedCounts.search=0; loadTab(AppState.currentTab || 'home'); }
+    function clearSearch(){ 
+      document.getElementById('searchInput').value=''; 
+      currentSearchQuery=''; 
+      loadedCounts.search=0; 
+      loadTab(AppState.currentTab || 'home'); 
+    }
 
     /* ======== Settings, Export/Import, Reset ======== */
     function renderSettings(){
@@ -421,14 +541,15 @@
 
       html += `<div class="card"><div class="card-title"><i class="fas fa-database"></i> بيانات</div>
         <div style="display:flex;flex-direction:column;gap:8px;">
-          <button class="btn-primary" onclick="exportData()">تصدير البيانات</button>
-          <button class="btn-primary" style="background:linear-gradient(90deg,var(--accent),#9b59b6)" onclick="importData()">استيراد البيانات</button>
-          <button class="reset-btn" onclick="resetAllData()">حذف جميع البيانات</button>
+          <button class="btn-primary" style="background:var(--primary);color:#000;padding:10px;border-radius:8px;border:none;cursor:pointer;" onclick="exportData()">تصدير البيانات</button>
+          <button class="btn-primary" style="background:linear-gradient(90deg,var(--accent),#9b59b6);color:#000;padding:10px;border-radius:8px;border:none;cursor:pointer;" onclick="importData()">استيراد البيانات</button>
+          <button class="reset-btn" style="background:#e74c3c;color:#fff;padding:10px;border-radius:8px;border:none;cursor:pointer;" onclick="resetAllData()">حذف جميع البيانات</button>
         </div>
       </div>`;
 
       html += `<div class="card"><div class="card-title"><i class="fas fa-info-circle"></i> حول</div>
         <p style="line-height:1.6;">تطبيق زاد الذاكرين — تم تقسيم الأذكار إلى ملفات منفصلة (morning.json, evening.json, general.json) ويتم تحميلها تدريجياً لتحسين الأداء.</p>
+        <p style="line-height:1.6;margin-top:10px;"><strong>ملاحظة:</strong> تأكد من وجود ملفات JSON في نفس المجلد على السيرفر أو قم بتعديل المسارات في الكود.</p>
       </div>`;
 
       content.innerHTML = html;
@@ -446,31 +567,55 @@
     }
 
     function exportData(){
-      const data = { adhkarHistory: AppState.adhkarHistory, settings: AppState.settings, theme: AppState.currentTheme, exportedAt: new Date().toISOString() };
+      const data = { 
+        adhkarHistory: AppState.adhkarHistory, 
+        settings: AppState.settings, 
+        theme: AppState.currentTheme, 
+        exportedAt: new Date().toISOString() 
+      };
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'زاد-الذاكرين-البيانات.json';
-      document.body.appendChild(a); a.click(); a.remove();
+      const a = document.createElement('a'); 
+      a.href = url; 
+      a.download = 'زاد-الذاكرين-البيانات.json';
+      document.body.appendChild(a); 
+      a.click(); 
+      a.remove();
       URL.revokeObjectURL(url);
       showToast('تم تصدير البيانات', 'success');
     }
 
     function importData(){
-      const input = document.createElement('input'); input.type = 'file'; input.accept = '.json,application/json';
+      const input = document.createElement('input'); 
+      input.type = 'file'; 
+      input.accept = '.json,application/json';
       input.onchange = e => {
-        const f = e.target.files[0]; if(!f) return;
+        const f = e.target.files[0]; 
+        if(!f) return;
         const r = new FileReader();
         r.onload = ev => {
           try{
             const data = JSON.parse(ev.target.result);
             if(!confirm('هل تريد استيراد البيانات؟ سيتم استبدال بياناتك الحالية.')) return;
-            if(data.adhkarHistory){ AppState.adhkarHistory = data.adhkarHistory; Storage.save('adhkar_history', AppState.adhkarHistory); }
-            if(data.settings){ AppState.settings = data.settings; Storage.save('app_settings', AppState.settings); }
-            if(data.theme){ AppState.currentTheme = data.theme; applyTheme(data.theme); }
+            if(data.adhkarHistory){ 
+              AppState.adhkarHistory = data.adhkarHistory; 
+              Storage.save('adhkar_history', AppState.adhkarHistory); 
+            }
+            if(data.settings){ 
+              AppState.settings = data.settings; 
+              Storage.save('app_settings', AppState.settings); 
+            }
+            if(data.theme){ 
+              AppState.currentTheme = data.theme; 
+              applyTheme(data.theme); 
+            }
             updateDailyStats();
             showToast('تم استيراد البيانات', 'success');
             loadTab('home');
-          }catch(err){ console.error(err); showToast('ملف غير صالح للاستيراد', 'warn'); }
+          }catch(err){ 
+            console.error(err); 
+            showToast('ملف غير صالح للاستيراد', 'warn'); 
+          }
         };
         r.readAsText(f);
       };
@@ -481,7 +626,11 @@
       if(!confirm('هل أنت متأكد من حذف جميع البيانات؟')) return;
       localStorage.clear();
       AppState = {
-        currentTab:'home', currentTheme:'default', adhkarHistory:{}, lastResetDate:'', dailyStats:{total:0,completed:0,date:''},
+        currentTab:'home', 
+        currentTheme:'default', 
+        adhkarHistory:{}, 
+        lastResetDate:'', 
+        dailyStats:{total:0,completed:0,date:''},
         settings:{ sound:true, notifications:true, autoReset:true, showBenefits:true }
       };
       applyTheme('default');
@@ -491,37 +640,57 @@
     }
 
     /* ======== Theme apply ======== */
-    const Themes = [{id:'default',name:'ذهبي',class:''},{id:'blue',name:'أزرق',class:'theme-blue'},{id:'green',name:'أخضر',class:'theme-green'},{id:'purple',name:'أرجواني',class:'theme-purple'},{id:'orange',name:'برتقالي',class:'theme-orange'}];
+    const Themes = [
+      {id:'default',name:'ذهبي',class:''},
+      {id:'blue',name:'أزرق',class:'theme-blue'},
+      {id:'green',name:'أخضر',class:'theme-green'}
+    ];
+    
     function applyTheme(themeId=AppState.currentTheme){
       const body = document.getElementById('app-body');
       Themes.forEach(t => { if(t.class) body.classList.remove(t.class); });
       const sel = Themes.find(t => t.id === themeId);
       if(sel && sel.class) body.classList.add(sel.class);
-      AppState.currentTheme = themeId; Storage.save('app_theme', themeId);
+      AppState.currentTheme = themeId; 
+      Storage.save('app_theme', themeId);
     }
 
     /* ======== Tab loader ======== */
     async function loadTab(tabName){
       AppState.currentTab = tabName;
-      document.querySelectorAll('.nav-item').forEach(btn => btn.setAttribute('aria-current', btn.getAttribute('data-tab') === tabName ? 'true' : 'false'));
+      document.querySelectorAll('.nav-item').forEach(btn => 
+        btn.setAttribute('aria-current', btn.getAttribute('data-tab') === tabName ? 'true' : 'false')
+      );
       currentSearchQuery = '';
       document.getElementById('searchInput').value = '';
       if(!loadedCounts[tabName]) loadedCounts[tabName] = 0;
-      if(tabName === 'home') await renderHome();
-      else if(tabName === 'morning') await renderMorning();
-      else if(tabName === 'evening') await renderEvening();
-      else if(tabName === 'general') await renderGeneral();
-      else if(tabName === 'settings') renderSettings();
+      
+      try {
+        if(tabName === 'home') await renderHome();
+        else if(tabName === 'morning') await renderMorning();
+        else if(tabName === 'evening') await renderEvening();
+        else if(tabName === 'general') await renderGeneral();
+        else if(tabName === 'settings') renderSettings();
+      } catch(error) {
+        console.error('خطأ في تحميل المحتوى:', error);
+        showToast('حدث خطأ في تحميل المحتوى', 'warn');
+      }
+      
       window.scrollTo({ top:0, behavior:'smooth' });
     }
 
-    function reloadCurrentTab(){ loadTab(AppState.currentTab || 'home'); }
+    function reloadCurrentTab(){ 
+      loadTab(AppState.currentTab || 'home'); 
+    }
 
     /* ======== Initialization ======== */
     window.addEventListener('load', async () => {
       applyTheme();
       document.getElementById('current-date').textContent = getArabicDate();
-      setInterval(()=>{ document.getElementById('current-date').textContent = getArabicDate(); }, 60000);
+      setInterval(()=>{ 
+        document.getElementById('current-date').textContent = getArabicDate(); 
+      }, 60000);
+      
       await loadAdhkarJson();
       checkDailyReset();
       setInterval(checkDailyReset, 3600000);
