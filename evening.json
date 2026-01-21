@@ -150,6 +150,4 @@
     {"id":1148,"text":"اللَّهُمَّ اغْفِرْ لِنَا وَلِآخِرِينَا مِنَ الْمُؤْمِنِينَ", "count":1,"category":"evening","reference":"دعاء","benefit":"الرفعة والمغفرة للجميع"},
     {"id":1149,"text":"اللَّهُمَّ اجْعَلْنَا مِنَ الَّذِينَ يَفْعَلُونَ الْخَيْرَ سِرًّا وَعَلانِيَةً", "count":1,"category":"evening","reference":"دعاء","benefit":"الاستقامة في السر والعلن"},
     {"id":1150,"text":"اللَّهُمَّ اغْفِرْ لَنَا وَثَبِّتْنَا فِي الْخَيْرِ", "count":1,"category":"evening","reference":"دعاء","benefit":"الدوام على الخير والثبات"}
-    /* Note: entries continue programmatically up to id 1200 following the same pattern, total 200 entries */
-  ]
-}
+    
