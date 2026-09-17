@@ -1,113 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>زاد الذاكرين — الإصدار الشامل</title>
-    <meta name="theme-color" content="#0f5132">
-    <meta name="description" content="زاد الذاكرين: القرآن الكريم والأذكار الموثقة والمسبحة ومتابعة العبادات">
-    <link rel="manifest" href="manifest.webmanifest">
-    <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
-    
-    <!-- خطوط وأيقونات محلية للعمل دون اتصال -->
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/css/local-fonts.css">
-    
-    <!-- ملفات التطبيق -->
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="config.js"></script>
-    <script defer src="data.js"></script>
-    <script defer src="verified-adhkar.js"></script>
-    <script defer src="app.js"></script>
-    <script defer src="quran.js"></script>
-    <script defer src="prayer.js"></script>
-    <script defer src="enhancements.js"></script>
-    <script defer src="quran-features.js"></script>
-    <script defer src="quran-audio.js"></script>
-    <script defer src="surah-audio.js"></script>
-    <script defer src="quran-library.js"></script>
-    <script defer src="audio-downloads.js"></script>
-    <script defer src="quran-v48.js"></script>
-    <script defer src="app-shell.js"></script>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b1512"><meta name="description" content="زاد الذاكرين — أذكار نبوية وأدعية قرآنية موثقة">
+  <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <title>زاد الذاكرين</title>
+  <style>
+    :root{--bg:#0b1512;--surface:#13231e;--surface2:#1c3129;--text:#f3f0e7;--muted:#b8c3ba;--primary:#d2ae62;--accent:#69c49b;--danger:#e77b7b;--line:#ffffff16;--shadow:0 18px 45px #0005}
+    [data-theme=light]{--bg:#faf7ee;--surface:#fffdf8;--surface2:#f1eadc;--text:#19251f;--muted:#59655d;--primary:#89651b;--accent:#147951;--line:#17211917;--shadow:0 12px 28px #4e3d1c16}
+    [data-theme=blue]{--bg:#091522;--surface:#102236;--surface2:#193149;--text:#eff7ff;--muted:#b7cadb;--primary:#8ac6ff;--accent:#55d3ca}
+    [data-theme=sand]{--bg:#251b12;--surface:#342719;--surface2:#4b3824;--text:#fff7e9;--muted:#d9c6aa;--primary:#efc87b;--accent:#e98e60}
+    [data-theme=rose]{--bg:#211217;--surface:#351d26;--surface2:#4b2936;--text:#fff2f5;--muted:#ddbbc5;--primary:#f2b8c8;--accent:#e697b5}
+    [data-theme=purple]{--bg:#151022;--surface:#261b38;--surface2:#39294e;--text:#f7f0ff;--muted:#d4c3e5;--primary:#c6a5f5;--accent:#9bdbbd}
+    [data-theme=orange]{--bg:#24140d;--surface:#3b2217;--surface2:#512f20;--text:#fff5ef;--muted:#e5c8b6;--primary:#f4ae69;--accent:#9ce0be}
+    [data-theme=greenlight]{--bg:#eff8f0;--surface:#fffefa;--surface2:#e0f0e3;--text:#183022;--muted:#4c6755;--primary:#34724a;--accent:#168267;--line:#18302218;--shadow:0 12px 28px #1b5a2a14}
+    [data-theme=lavender]{--bg:#f7f3ff;--surface:#fffefe;--surface2:#ece5fa;--text:#30253d;--muted:#685b76;--primary:#7351a2;--accent:#4b947b;--line:#30253d17;--shadow:0 12px 28px #4b356414}
+    [data-theme=night]{--bg:#060a13;--surface:#111725;--surface2:#1b2436;--text:#f4f7fc;--muted:#b9c3d2;--primary:#d7bd72;--accent:#62b7db}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}.app{max-width:780px;margin:auto;padding:env(safe-area-inset-top) 16px calc(94px + env(safe-area-inset-bottom))}header{padding:25px 4px 16px;text-align:center;background:radial-gradient(circle at 50% -40%,var(--surface2),transparent 65%)}h1{font-family:serif;font-size:2.2rem;margin:0;color:var(--primary)}.subtitle,.date{margin:8px 0;color:var(--muted)}.date{font-size:.88rem;color:var(--primary)}.card,.entry{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;margin:12px 0;box-shadow:var(--shadow)}.section-title,.entry h2{font-size:1.05rem;font-weight:700;margin:0 0 12px;color:var(--primary)}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{background:var(--surface2);border-radius:14px;padding:12px;text-align:center}.stat b{display:block;font-size:1.4rem;color:var(--primary)}.stat span{font-size:.78rem;color:var(--muted)}button,input,select{font:inherit}.tabs{display:flex;gap:8px;overflow:auto;padding:2px 0 8px}.tab{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:12px;padding:10px 12px;white-space:nowrap;cursor:pointer}.tab.active{background:var(--primary);color:#21180a;border-color:transparent;font-weight:700}.search input{width:100%;border:1px solid var(--line);background:var(--surface2);border-radius:13px;color:var(--text);padding:12px;outline:none}.text{font-family:serif;font-size:1.18rem;line-height:2;text-align:right;white-space:pre-line}.ref,.small{font-size:.82rem;color:var(--muted);line-height:1.7;margin:12px 0}.notice{font-size:.9rem;color:var(--muted);line-height:1.8;background:var(--surface2);padding:10px;border-radius:12px}.counter{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:12px}.count{font-weight:700;color:var(--primary)}.stepper{display:flex;gap:8px;align-items:center}.stepper button{width:38px;height:38px;border:0;border-radius:50%;background:var(--surface2);color:var(--text);font-size:1.2rem;cursor:pointer}.complete{border:0;background:var(--accent);color:#082117;font-weight:700;padding:10px 13px;border-radius:12px;cursor:pointer}.complete.done{background:#4cae75;color:#fff}.progress{height:7px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-top:12px}.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--primary));border-radius:inherit}.empty{padding:35px 16px;text-align:center;color:var(--muted)}.settings label{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.settings select{background:var(--surface2);color:var(--text);border:1px solid var(--line);padding:8px;border-radius:9px}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions button{border:0;padding:10px 12px;border-radius:11px;background:var(--surface2);color:var(--text);cursor:pointer}.actions .danger{background:var(--danger);color:#fff}.tasbih{text-align:center}.tasbih .number{font-size:4rem;color:var(--primary);font-weight:bold;margin:8px}.tasbih .big{width:150px;height:150px;border-radius:50%;border:0;background:radial-gradient(circle,var(--accent),var(--primary));color:#102218;font-size:1.1rem;font-weight:bold;box-shadow:var(--shadow);cursor:pointer}nav{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:center;padding:9px max(7px,env(safe-area-inset-right)) calc(9px + env(safe-area-inset-bottom));z-index:10}nav button{border:0;background:transparent;color:var(--muted);padding:7px 9px;cursor:pointer;font-size:.7rem}nav button.active{color:var(--primary);font-weight:bold}@media(min-width:680px){.grid{grid-template-columns:repeat(4,1fr)}.app{padding-left:22px;padding-right:22px}nav button{padding:7px 18px}}
+  </style>
 </head>
-<body id="app-body">
-    <a class="skip-link" href="#page-content">تخطي إلى المحتوى</a>
-
-    <div class="header-section">
-        <h1>زاد الذاكرين</h1>
-        <p id="current-date"></p>
-        <div id="current-theme"></div>
-
-        <!-- زر سريع لفتح لوحة الإدخال اليدوي للموقع -->
-        <button id="manual-toggle" style="margin-top:8px;padding:6px 10px;border-radius:8px;border:none;background:#f6bd26;color:#000;cursor:pointer;">
-            <i class="fas fa-map-marker-alt"></i> تحديد الموقع يدوياً
-        </button>
-    </div>
-
-    <main class="main-content">
-        <div id="page-content"></div>
-    </main>
-
-    <div class="scroll-top" id="scrollTop">
-        <i class="fas fa-arrow-up"></i>
-    </div>
-
-    <nav class="bottom-nav">
-        <div class="nav-item active" data-tab="home">
-            <i class="fas fa-home"></i>
-            <span>الرئيسية</span>
-        </div>
-        <div class="nav-item" data-tab="adhkar">
-            <i class="fas fa-hands-praying"></i>
-            <span>الأذكار</span>
-        </div>
-        <div class="nav-item" data-tab="tasbeeh">
-            <i class="fas fa-circle-notch"></i>
-            <span>المسبحة</span>
-        </div>
-        <div class="nav-item" data-tab="quran">
-            <i class="fas fa-book-quran"></i>
-            <span>القرآن</span>
-        </div>
-        <div class="nav-item" data-tab="audio-quran">
-            <i class="fas fa-headphones"></i>
-            <span>المسموع</span>
-        </div>
-        <div class="nav-item" data-tab="settings">
-            <i class="fas fa-user-gear"></i>
-            <span>الإعدادات</span>
-        </div>
-    </nav>
-
-    <!-- لوحة الإدخال اليدوي (مخفية افتراضياً) -->
-    <div id="manual-location-panel" style="display:none; position:fixed; left:16px; right:16px; bottom:86px; z-index:9999;">
-        <div style="background:rgba(0,0,0,0.8); padding:14px; border-radius:12px; color:#fff; box-shadow:0 10px 30px rgba(0,0,0,0.6);">
-            <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
-                <strong>إدخال الموقع يدوياً</strong>
-                <button id="manual-close" style="background:transparent;border:1px solid rgba(255,255,255,0.08);color:#fff;padding:6px 8px;border-radius:8px;cursor:pointer;">إغلاق</button>
-            </div>
-
-            <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
-                <input id="manual-lat" placeholder="خط العرض (مثال: 24.7136)" type="number" step="0.0001"
-                       style="flex:1; min-width:160px; padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:#fff;">
-                <input id="manual-lon" placeholder="خط الطول (مثال: 46.6753)" type="number" step="0.0001"
-                       style="flex:1; min-width:160px; padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:#fff;">
-                <input id="manual-city" placeholder="المدينة (اختياري)" type="text"
-                       style="flex:1 0 220px; padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:#fff;">
-            </div>
-
-            <div style="display:flex; gap:8px; margin-top:12px;">
-                <button id="save-manual-btn" style="background:#2ecc71;border:none;color:#000;padding:8px 12px;border-radius:8px;cursor:pointer;">حفظ الموقع وتحديث</button>
-                <button id="clear-manual-btn" style="background:#e74c3c;border:none;color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;">إزالة الموقع اليدوي</button>
-                <div style="flex:1; align-self:center; color:#cbd6e1; font-size:0.85rem;">التحديث يحدث مرة يومياً أو عند الحفظ اليدوي</div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-      if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
-        window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(console.warn));
-      }
-    </script>
-</body>
-</html>
+<body>
+<main class="app"><header><h1>زاد الذاكرين</h1><p class="subtitle">أذكار نبوية وأدعية قرآنية، بتوثيقٍ ظاهر</p><div id="date" class="date"></div></header>
+<section id="tabs" class="tabs"></section><div class="search"><input id="search" type="search" autocomplete="off" placeholder="ابحث في النص أو المصدر…" aria-label="بحث"></div><div id="content" aria-live="polite"></div></main>
+<nav><button data-view="home" class="active">الرئيسية</button><button data-view="adhkar">الأذكار</button><button data-view="duas">أدعية القرآن</button><button data-view="virtues">فضائل الذكر</button><button data-view="tasbih">المسبحة</button><button data-view="settings">الإعدادات</button></nav>
+<script>
+const KEY='zad-althakireen:v3:',store={get:(k,f)=>{try{return JSON.parse(localStorage.getItem(KEY+k))??f}catch{return f}},set:(k,v)=>localStorage.setItem(KEY+k,JSON.stringify(v)),remove:k=>localStorage.removeItem(KEY+k)};
+const quranicDuas=[
+ {id:'q-2-201',title:'دعاء خير الدنيا والآخرة',text:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',source:'القرآن الكريم — البقرة: 201'},
+ {id:'q-3-8',title:'الثبات بعد الهداية',text:'رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً إِنَّكَ أَنْتَ الْوَهَّابُ',source:'القرآن الكريم — آل عمران: 8'},
+ {id:'q-3-16',title:'دعاء المغفرة',text:'رَبَّنَا إِنَّنَا آمَنَّا فَاغْفِرْ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ النَّارِ',source:'القرآن الكريم — آل عمران: 16'},
+ {id:'q-7-23',title:'دعاء آدم وحواء عليهما السلام',text:'رَبَّنَا ظَلَمْنَا أَنْفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنَ الْخَاسِرِينَ',source:'القرآن الكريم — الأعراف: 23'},
+ {id:'q-17-24',title:'الدعاء للوالدين',text:'رَبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا',source:'القرآن الكريم — الإسراء: 24'},
+ {id:'q-20-114',title:'طلب زيادة العلم',text:'رَبِّ زِدْنِي عِلْمًا',source:'القرآن الكريم — طه: 114'},
+ {id:'q-23-118',title:'دعاء المغفرة والرحمة',text:'رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ',source:'القرآن الكريم — المؤمنون: 118'},
+ {id:'q-25-65',title:'الوقاية من عذاب جهنم',text:'رَبَّنَا اصْرِفْ عَنَّا عَذَابَ جَهَنَّمَ إِنَّ عَذَابَهَا كَانَ غَرَامًا',source:'القرآن الكريم — الفرقان: 65'},
+ {id:'q-25-74',title:'صلاح الأهل والذرية',text:'رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا',source:'القرآن الكريم — الفرقان: 74'},
+ {id:'q-28-24',title:'طلب الخير',text:'رَبِّ إِنِّي لِمَا أَنْزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ',source:'القرآن الكريم — القصص: 24'},
+ {id:'q-59-10',title:'للمؤمنين السابقين',text:'رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ وَلَا تَجْعَلْ فِي قُلُوبِنَا غِلًّا لِلَّذِينَ آمَنُوا رَبَّنَا إِنَّكَ رَءُوفٌ رَحِيمٌ',source:'القرآن الكريم — الحشر: 10'},
+ {id:'q-66-8',title:'تمام النور والمغفرة',text:'رَبَّنَا أَتْمِمْ لَنَا نُورَنَا وَاغْفِرْ لَنَا إِنَّكَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ',source:'القرآن الكريم — التحريم: 8'}
+];
+const virtues=[
+ {title:'طمأنينة القلب',text:'أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ',source:'القرآن الكريم — الرعد: 28'},
+ {title:'ذكر الله لعبده',text:'فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي وَلَا تَكْفُرُونِ',source:'القرآن الكريم — البقرة: 152'},
+ {title:'الأمر بكثرة الذكر',text:'يَا أَيُّهَا الَّذِينَ آمَنُوا اذْكُرُوا اللَّهَ ذِكْرًا كَثِيرًا • وَسَبِّحُوهُ بُكْرَةً وَأَصِيلًا',source:'القرآن الكريم — الأحزاب: 41–42'},
+ {title:'أجر الذاكرين والذاكرات',text:'وَالذَّاكِرِينَ اللَّهَ كَثِيرًا وَالذَّاكِرَاتِ أَعَدَّ اللَّهُ لَهُمْ مَغْفِرَةً وَأَجْرًا عَظِيمًا',source:'القرآن الكريم — الأحزاب: 35'},
+ {title:'الحي والميت',text:'مثل الذي يذكر ربه والذي لا يذكر ربه مثل الحي والميت.',source:'صحيح البخاري، كتاب الدعوات، حديث 6407'},
+ {title:'سبق المفردون',text:'سبق المفردون. قالوا: وما المفردون يا رسول الله؟ قال: الذاكرون الله كثيرًا والذاكرات.',source:'صحيح مسلم، كتاب الذكر والدعاء، حديث 2676'},
+ {title:'مجالس الذكر',text:'ما جلس قوم يذكرون الله إلا حفتهم الملائكة، وغشيتهم الرحمة، ونزلت عليهم السكينة، وذكرهم الله فيمن عنده.',source:'صحيح مسلم، كتاب الذكر والدعاء، حديث 2700'},
+ {title:'محو الخطايا',text:'من قال: سبحان الله وبحمده في يوم مائة مرة حطت خطاياه وإن كانت مثل زبد البحر.',source:'صحيح البخاري 6405، وصحيح مسلم 2691'}
+];
+const scholarly=[
+ {title:'من كلام عبد الله بن مسعود رضي الله عنه',text:'إن هذه القلوب أوعية، فاشغلوها بالقرآن، ولا تشغلوها بغيره.',source:'حلية الأولياء لأبي نعيم، 1/130'},
+ {title:'من كلام شيخ الإسلام ابن تيمية',text:'إن في الدنيا جنةً، من لم يدخلها لم يدخل جنة الآخرة.',source:'الوابل الصيب لابن القيم، ص 69 (ضمن نقله عن ابن تيمية)'},
+ {title:'من كلام ابن القيم',text:'في القلب شعثٌ لا يلمه إلا الإقبال على الله، وعليه وحشة لا يزيلها إلا الأنس به في خلوته.',source:'الفوائد لابن القيم، ص 85'}
+];
+let adhkar=[],category='all',view='home',query='',settings=store.get('settings',{theme:'default',reset:true}),history=store.get('history',{}),lastReset=store.get('reset',''),tasbih=store.get('tasbih',0);
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function today(){return new Date().toISOString().slice(0,10)}function applyTheme(){document.documentElement.dataset.theme=settings.theme==='default'?'':settings.theme}function maybeReset(){if(settings.reset&&lastReset!==today()){history={};lastReset=today();store.set('history',history);store.set('reset',lastReset)}}function state(id){return history[id]||{count:0,done:false}}function setState(id,s){history[id]=s;store.set('history',history)}
+function allDhikr(){return adhkar}function filter(list){const q=query.trim().toLowerCase();return list.filter(e=>!q||(e.title+' '+e.text+' '+e.source).toLowerCase().includes(q))}function total(){return allDhikr().reduce((a,e)=>a+e.repeats,0)}function done(){return allDhikr().reduce((a,e)=>a+Math.min(state(e.id).count,e.repeats),0)}
+function tabs(){const choices=[['all','كل الأذكار'],['daily','الصباح والمساء'],['general','أبواب حصن المسلم']];$('#tabs').innerHTML=choices.map(([id,n])=>'<button class="tab '+(category===id?'active':'')+'" data-cat="'+id+'">'+n+'</button>').join('');document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{category=b.dataset.cat;view='adhkar';sync()})}
+function home(){const d=done(),t=total(),pct=t?Math.round(d/t*100):0;$('#content').innerHTML='<section class="card"><h2 class="section-title">وردك من الأذكار النبوية</h2><div class="grid"><div class="stat"><b>'+d+'</b><span>تكرار مُنجز</span></div><div class="stat"><b>'+t+'</b><span>التكرار المستهدف</span></div><div class="stat"><b>'+pct+'%</b><span>نسبة الإنجاز</span></div><div class="stat"><b>'+adhkar.length+'</b><span>ذكر موثق</span></div></div><div class="progress"><i style="width:'+pct+'%"></i></div></section><section class="card"><h2 class="section-title">منهج المحتوى</h2><p class="notice">الأذكار النبوية من ملف حصن المسلم الموثق. الأدعية القرآنية تحمل رقم السورة والآية. فضائل الذكر من القرآن والصحيحين أو صحيح مسلم. أقوال العلماء تُفصل عن النص النبوي وتظهر مع الإحالة، ولا تُقدَّم كحديث.</p></section><section class="card"><h2 class="section-title">ابدأ الآن</h2><div class="actions"><button id="openDaily">أذكار الصباح والمساء</button><button id="openDuas">أدعية القرآن</button><button id="openVirtues">فضائل الذكر</button></div></section>';$('#openDaily').onclick=()=>{category='daily';view='adhkar';sync()};$('#openDuas').onclick=()=>{view='duas';sync()};$('#openVirtues').onclick=()=>{view='virtues';sync()}}
+function dhikrCard(e){const s=state(e.id),pct=Math.round(s.count/e.repeats*100),benefit=e.benefit?'<p class="notice">الفائدة الواردة في المصدر: '+esc(e.benefit)+'</p>':'';return '<article class="entry"><h2>'+esc(e.section||e.title)+'</h2><div class="text">'+esc(e.text)+'</div><p class="ref">التكرار: '+e.repeats+' — المصدر: '+esc(e.source)+'</p>'+benefit+'<div class="progress"><i style="width:'+pct+'%"></i></div><div class="counter"><span class="count">'+s.count+' / '+e.repeats+'</span><div class="stepper"><button data-action="minus" data-id="'+e.id+'">−</button><button data-action="plus" data-id="'+e.id+'">+</button></div><button class="complete '+(s.done?'done':'')+'" data-action="complete" data-id="'+e.id+'">'+(s.done?'مكتمل ✓':'إكمال')+'</button></div></article>'}
+function adhkarView(){const list=filter(adhkar.filter(e=>category==='all'||e.category===category)),name={all:'كل الأذكار النبوية',daily:'أذكار اليوم والليلة',general:'أبواب حصن المسلم'}[category];$('#content').innerHTML='<section class="card"><h2 class="section-title">'+name+'</h2><p class="notice">لا تُعرض هنا إلا الأذكار النبوية المحفوظة في ملف المصدر.</p></section>'+(list.length?list.map(dhikrCard).join(''):'<div class="empty">لا توجد نتائج مطابقة.</div>');document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>change(b.dataset.id,b.dataset.action))}
+function simpleCards(title,items){const list=filter(items);$('#content').innerHTML='<section class="card"><h2 class="section-title">'+title+'</h2><p class="notice">هذه البطاقات للقراءة والتدبر، وليست عدادًا بتكرار محدد إلا إذا دل الدليل على ذلك.</p></section>'+list.map(e=>'<article class="entry"><h2>'+esc(e.title)+'</h2><div class="text">'+esc(e.text)+'</div><p class="ref">'+esc(e.source)+'</p></article>').join('')+(list.length?'':'<div class="empty">لا توجد نتائج مطابقة.</div>')}
+function virtuesView(){const list=[...virtues,...scholarly];simpleCards('فضائل الذكر وكلام العلماء',list)}
+function tasbihView(){$('#content').innerHTML='<section class="card tasbih"><h2 class="section-title">المسبحة</h2><p class="notice">عداد شخصي للذكر؛ اختر اللفظ والعدد بنفسك ولا يُنسب فضل أو عدد معين إلا بدليل.</p><div class="number" id="tasbihNum">'+tasbih+'</div><button class="big" id="tap">سبّح الآن</button><div class="actions" style="justify-content:center;margin-top:16px"><button id="resetTasbih">تصفير العداد</button></div></section>';$('#tap').onclick=()=>{tasbih++;store.set('tasbih',tasbih);$('#tasbihNum').textContent=tasbih};$('#resetTasbih').onclick=()=>{tasbih=0;store.set('tasbih',0);tasbihView()}}
+function settingsView(){$('#content').innerHTML='<section class="card settings"><h2 class="section-title">الإعدادات</h2><label>السمة <select id="theme"><option value="default">زمردي وذهبي</option><option value="light">صباحي فاتح</option><option value="blue">أزرق ليلي</option><option value="sand">رملي ملكي</option><option value="rose">وردي هادئ</option><option value="purple">أرجواني ليلي</option><option value="orange">برتقالي ليلي</option><option value="greenlight">أخضر صباحي</option><option value="lavender">لافندر صباحي</option><option value="night">ليل عميق</option></select></label><label>إعادة عداد الأذكار يوميًا <input id="reset" type="checkbox" '+(settings.reset?'checked':'')+'></label></section><section class="card"><h2 class="section-title">بياناتي</h2><div class="actions"><button id="export">تصدير بياناتي</button><button id="import">استيراد بياناتي</button><button id="clear" class="danger">مسح بيانات التطبيق</button></div><input id="file" type="file" accept="application/json" hidden></section>';$('#theme').value=settings.theme;$('#theme').onchange=e=>{settings.theme=e.target.value;store.set('settings',settings);applyTheme()};$('#reset').onchange=e=>{settings.reset=e.target.checked;store.set('settings',settings)};$('#export').onclick=exportData;$('#import').onclick=()=>$('#file').click();$('#file').onchange=importData;$('#clear').onclick=clearData}
+function change(id,a){const e=adhkar.find(x=>x.id===id),s=state(id);if(a==='plus')s.count=Math.min(e.repeats,s.count+1);if(a==='minus')s.count=Math.max(0,s.count-1);if(a==='complete')s.count=e.repeats;s.done=s.count>=e.repeats;setState(id,s);adhkarView()}
+function exportData(){const a=document.createElement('a'),b=new Blob([JSON.stringify({version:3,history,settings,tasbih},null,2)],{type:'application/json'});a.href=URL.createObjectURL(b);a.download='zad-al-dakireen-data.json';a.click();URL.revokeObjectURL(a.href)}function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!x||typeof x.history!=='object')throw 0;history=x.history;if(x.settings)settings={...settings,...x.settings};tasbih=Number(x.tasbih)||0;store.set('history',history);store.set('settings',settings);store.set('tasbih',tasbih);applyTheme();sync()}catch{alert('ملف النسخة الاحتياطية غير صالح.')}};r.readAsText(f)}function clearData(){if(!confirm('سيتم حذف تقدمك وإعدادات التطبيق من هذا الجهاز فقط. هل تريد المتابعة؟'))return;['history','settings','reset','tasbih'].forEach(store.remove);history={};settings={theme:'default',reset:true};tasbih=0;lastReset='';applyTheme();sync()}
+function sync(){tabs();document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.view===view));if(view==='home')home();else if(view==='adhkar')adhkarView();else if(view==='duas')simpleCards('أدعية القرآن الكريم',quranicDuas);else if(view==='virtues')virtuesView();else if(view==='tasbih')tasbihView();else settingsView()}document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{view=b.dataset.view;if(view==='adhkar'&&!category)category='all';sync()});$('#search').oninput=e=>{query=e.target.value;sync()}
+async function init(){applyTheme();maybeReset();$('#date').textContent=new Intl.DateTimeFormat('ar-SA',{weekday:'long',year:'numeric',month:'long',day:'numeric'}).format(new Date());try{const r=await fetch('verified-adhkar.json');if(!r.ok)throw 0;adhkar=(await r.json()).entries;if(!Array.isArray(adhkar)||!adhkar.every(e=>e.id&&e.text&&e.source&&Number.isInteger(e.repeats)))throw 0;sync()}catch{$('#content').innerHTML='<div class="card">تعذر تحميل محتوى الأذكار الموثقة.</div>'}if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})}init();
+</script></body></html>
