@@ -1,10 +1,113 @@
-<!doctype html>
-<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b1512"><meta name="description" content="زاد الذاكرين — أذكار موثقة مع عداد محلي"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icon.svg" type="image/svg+xml"><title>زاد الذاكرين</title><style>
-:root{--bg:#0b1512;--surface:#13231e;--surface2:#1c3129;--text:#f3f0e7;--muted:#b8c3ba;--primary:#d2ae62;--accent:#69c49b;--danger:#e77b7b;--line:#ffffff16;--shadow:0 18px 45px #0005}[data-theme=light]{--bg:#faf7ee;--surface:#fffdf8;--surface2:#f1eadc;--text:#19251f;--muted:#59655d;--primary:#89651b;--accent:#147951;--line:#17211917;--shadow:0 12px 28px #4e3d1c16}[data-theme=blue]{--bg:#091522;--surface:#102236;--surface2:#193149;--text:#eff7ff;--muted:#b7cadb;--primary:#8ac6ff;--accent:#55d3ca}[data-theme=sand]{--bg:#251b12;--surface:#342719;--surface2:#4b3824;--text:#fff7e9;--muted:#d9c6aa;--primary:#efc87b;--accent:#e98e60}[data-theme=rose]{--bg:#211217;--surface:#351d26;--surface2:#4b2936;--text:#fff2f5;--muted:#ddbbc5;--primary:#f2b8c8;--accent:#e697b5}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}.app{max-width:780px;margin:auto;padding:env(safe-area-inset-top) 16px calc(94px + env(safe-area-inset-bottom))}header{padding:25px 4px 16px;text-align:center;background:radial-gradient(circle at 50% -40%,var(--surface2),transparent 65%)}h1{font-family:serif;font-size:2.2rem;margin:0;color:var(--primary)}.subtitle{margin:8px 0;color:var(--muted)}.date{font-size:.88rem;color:var(--primary)}.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:16px;margin:12px 0;box-shadow:var(--shadow)}.section-title{font-size:1.05rem;font-weight:700;margin:0 0 12px;color:var(--primary)}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{background:var(--surface2);border-radius:14px;padding:12px;text-align:center}.stat b{display:block;font-size:1.4rem;color:var(--primary)}.stat span{font-size:.78rem;color:var(--muted)}button,input{font:inherit}.tabs{display:flex;gap:8px;overflow:auto;padding:2px 0 8px}.tab{border:1px solid var(--line);background:var(--surface);color:var(--text);border-radius:12px;padding:10px 12px;white-space:nowrap;cursor:pointer}.tab.active{background:var(--primary);color:#21180a;border-color:transparent;font-weight:700}.search input{width:100%;border:1px solid var(--line);background:var(--surface2);border-radius:13px;color:var(--text);padding:12px;outline:none}.entry{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0}.entry h2{font-size:1rem;color:var(--primary);margin:0 0 10px}.text{font-family:serif;font-size:1.18rem;line-height:2;text-align:right;white-space:pre-line}.ref{font-size:.82rem;color:var(--muted);line-height:1.7;margin:12px 0}.counter{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:12px}.count{font-weight:700;color:var(--primary)}.stepper{display:flex;gap:8px;align-items:center}.stepper button{width:38px;height:38px;border:0;border-radius:50%;background:var(--surface2);color:var(--text);font-size:1.2rem;cursor:pointer}.complete{border:0;background:var(--accent);color:#082117;font-weight:700;padding:10px 13px;border-radius:12px;cursor:pointer}.complete.done{background:#4cae75;color:#fff}.progress{height:7px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-top:12px}.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--primary));border-radius:inherit;transition:width .2s}.empty{padding:35px 16px;text-align:center;color:var(--muted)}.notice{font-size:.84rem;color:var(--muted);line-height:1.7;background:var(--surface2);padding:10px;border-radius:12px}.settings label{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.settings select{background:var(--surface2);color:var(--text);border:1px solid var(--line);padding:8px;border-radius:9px}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions button{border:0;padding:10px 12px;border-radius:11px;background:var(--surface2);color:var(--text);cursor:pointer}.actions .danger{background:var(--danger);color:#fff}nav{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:center;padding:9px max(12px,env(safe-area-inset-right)) calc(9px + env(safe-area-inset-bottom));z-index:10}nav button{border:0;background:transparent;color:var(--muted);padding:7px 13px;cursor:pointer;font-size:.76rem}nav button.active{color:var(--primary);font-weight:bold}@media(min-width:680px){.grid{grid-template-columns:repeat(4,1fr)}.app{padding-left:22px;padding-right:22px}}
-</style></head><body><main class="app"><header><h1>زاد الذاكرين</h1><p class="subtitle">وردك الموثق، بهدوء وتركيز</p><div id="date" class="date"></div></header><section class="tabs"><button class="tab active" data-category="home">الرئيسية</button><button class="tab" data-category="daily">الصباح والمساء</button><button class="tab" data-category="general">كل الأبواب</button></section><input id="search" type="search" autocomplete="off" placeholder="ابحث في النص أو المصدر…" aria-label="بحث"><div id="content" aria-live="polite"></div></main><nav><button data-view="home" class="active">الرئيسية</button><button data-view="adhkar">الأذكار</button><button data-view="settings">الإعدادات</button></nav><script>
-const KEY='zad-althakireen:v2:',store={get:(k,f)=>{try{return JSON.parse(localStorage.getItem(KEY+k))??f}catch{return f}},set:(k,v)=>localStorage.setItem(KEY+k,JSON.stringify(v)),remove:k=>localStorage.removeItem(KEY+k)};let data=[],category='home',view='home',query='',settings=store.get('settings',{theme:'default',reset:true}),history=store.get('history',{}),lastReset=store.get('reset','');const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));function today(){return new Date().toISOString().slice(0,10)}function applyTheme(){document.documentElement.dataset.theme=settings.theme==='default'?'':settings.theme}function maybeReset(){if(settings.reset&&lastReset!==today()){history={};lastReset=today();store.set('history',history);store.set('reset',lastReset)}}function state(id){return history[id]||{count:0,done:false}}function setState(id,s){history[id]=s;store.set('history',history)}function matches(e){const q=query.trim().toLowerCase();return !q||(e.title+' '+e.text+' '+e.source).toLowerCase().includes(q)}function filtered(){return data.filter(e=>matches(e)&&(category==='home'||category==='all'||e.category===category))}function total(){return data.reduce((a,e)=>a+e.repeats,0)}function done(){return data.reduce((a,e)=>a+Math.min(state(e.id).count,e.repeats),0)}
-function renderHome(){const d=done(),t=total(),pct=t?Math.round(d/t*100):0;$('#content').innerHTML=`<section class="card"><h2 class="section-title">ورد اليوم</h2><div class="grid"><div class="stat"><b>${d}</b><span>تكرار مُنجز</span></div><div class="stat"><b>${t}</b><span>التكرار المستهدف</span></div><div class="stat"><b>${pct}%</b><span>نسبة الإنجاز</span></div><div class="stat"><b>${Object.values(history).filter(x=>x.done).length}</b><span>أذكار مكتملة</span></div></div><div class="progress"><i style="width:${pct}%"></i></div></section><section class="card"><h2 class="section-title">المقترح الآن</h2><p class="notice">افتح أذكار الصباح والمساء. جميع النصوص في هذه النسخة مأخوذة من واجهة حصن المسلم، مع حفظ باب المصدر لكل ذكر.</p><button class="complete" id="go-rec">فتح أذكار الصباح والمساء</button></section><section class="card"><h2 class="section-title">منهج التوثيق</h2><p class="notice">لا تظهر «الفائدة» إلا عندما تكون موثقة في الحقل المخصص. لا يضاف شرح إنشائي على أنه فضل نبوي.</p></section>`;$('#go-rec').onclick=()=>{category='daily';view='adhkar';sync()}}
-function card(e){const s=state(e.id),pct=Math.round(s.count/e.repeats*100),benefit=e.benefit?`<p class="notice">الفائدة الموثقة: ${esc(e.benefit)}</p>`:'';return `<article class="entry"><h2>${esc(e.title)}</h2><div class="text">${esc(e.text)}</div><p class="ref">التكرار: ${e.repeats} — المصدر: ${esc(e.source)}</p>${benefit}<div class="progress"><i style="width:${pct}%"></i></div><div class="counter"><span class="count">${s.count} / ${e.repeats}</span><div class="stepper"><button data-action="minus" data-id="${e.id}">−</button><button data-action="plus" data-id="${e.id}">+</button></div><button class="complete ${s.done?'done':''}" data-action="complete" data-id="${e.id}">${s.done?'مكتمل ✓':'إكمال'}</button></div></article>`}function renderAdhkar(){const list=filtered(),title=query?'نتائج البحث':({daily:'أذكار الصباح والمساء',general:'أبواب حصن المسلم',all:'كل الأذكار'}[category]||'كل الأذكار');$('#content').innerHTML=`<section class="card"><h2 class="section-title">${title}</h2><p class="notice">النصوص محفوظة من المصدر، والفوائد لا تُعرض إلا إن كانت موثقة.</p></section>${list.length?list.map(card).join(''):'<div class="empty">لا توجد نتائج مطابقة.</div>'}`;document.querySelectorAll('[data-action]').forEach(b=>b.onclick=()=>change(b.dataset.id,b.dataset.action))}
-function renderSettings(){$('#content').innerHTML=`<section class="card settings"><h2 class="section-title">الإعدادات</h2><label>السمة <select id="theme"><option value="default">زمردي وذهبي</option><option value="light">صباحي فاتح</option><option value="blue">أزرق ليلي</option><option value="sand">رملي ملكي</option><option value="rose">وردي هادئ</option></select></label><label>إعادة العداد يوميًا <input id="reset" type="checkbox" ${settings.reset?'checked':''}></label></section><section class="card"><h2 class="section-title">البيانات</h2><div class="actions"><button id="export">تصدير بياناتي</button><button id="import">استيراد بياناتي</button><button id="clear" class="danger">مسح بيانات التطبيق</button></div><input id="file" type="file" accept="application/json" hidden></section><section class="card"><h2 class="section-title">عن المحتوى</h2><p class="notice">هذه النسخة نواة مراجَعة للأذكار اليومية، ولا تزعم أنها تضم كل أبواب حصن المسلم.</p></section>`;$('#theme').value=settings.theme;$('#theme').onchange=e=>{settings.theme=e.target.value;store.set('settings',settings);applyTheme()};$('#reset').onchange=e=>{settings.reset=e.target.checked;store.set('settings',settings)};$('#export').onclick=exportData;$('#import').onclick=()=>$('#file').click();$('#file').onchange=importData;$('#clear').onclick=clearData}
-function change(id,a){const e=data.find(x=>x.id===id),s=state(id);if(a==='plus')s.count=Math.min(e.repeats,s.count+1);if(a==='minus')s.count=Math.max(0,s.count-1);if(a==='complete')s.count=e.repeats;s.done=s.count>=e.repeats;setState(id,s);renderAdhkar()}function exportData(){const a=document.createElement('a'),b=new Blob([JSON.stringify({version:2,history,settings},null,2)],{type:'application/json'});a.href=URL.createObjectURL(b);a.download='zad-al-dakireen-data.json';a.click();URL.revokeObjectURL(a.href)}function importData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!x||typeof x.history!=='object')throw 0;history=x.history;if(x.settings)settings={...settings,...x.settings};store.set('history',history);store.set('settings',settings);applyTheme();sync()}catch{alert('ملف النسخة الاحتياطية غير صالح.')}};r.readAsText(f)}function clearData(){if(!confirm('سيتم حذف تقدمك وإعدادات التطبيق من هذا الجهاز فقط. هل تريد المتابعة؟'))return;['history','settings','reset'].forEach(store.remove);history={};settings={theme:'default',reset:true};lastReset='';applyTheme();sync()}function sync(){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.category===category));document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.dataset.view===view));if(view==='home')renderHome();else if(view==='settings')renderSettings();else renderAdhkar()}document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{category=b.dataset.category;view=category==='home'?'home':'adhkar';sync()});document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{view=b.dataset.view;if(view==='adhkar'&&category==='home')category='all';sync()});$('#search').oninput=e=>{query=e.target.value;view='adhkar';category='all';sync()};async function init(){applyTheme();maybeReset();$('#date').textContent=new Intl.DateTimeFormat('ar-SA',{weekday:'long',year:'numeric',month:'long',day:'numeric'}).format(new Date());try{const r=await fetch('verified-adhkar.json');if(!r.ok)throw 0;data=(await r.json()).entries;if(!Array.isArray(data)||!data.every(e=>e.id&&e.text&&e.source&&Number.isInteger(e.repeats)))throw 0;sync()}catch{$('#content').innerHTML='<div class="card">تعذر تحميل محتوى الأذكار.</div>'}if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{})}init();
-</script></body></html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>زاد الذاكرين — الإصدار الشامل</title>
+    <meta name="theme-color" content="#0f5132">
+    <meta name="description" content="زاد الذاكرين: القرآن الكريم والأذكار الموثقة والمسبحة ومتابعة العبادات">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+    
+    <!-- خطوط وأيقونات محلية للعمل دون اتصال -->
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/local-fonts.css">
+    
+    <!-- ملفات التطبيق -->
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="config.js"></script>
+    <script defer src="data.js"></script>
+    <script defer src="verified-adhkar.js"></script>
+    <script defer src="app.js"></script>
+    <script defer src="quran.js"></script>
+    <script defer src="prayer.js"></script>
+    <script defer src="enhancements.js"></script>
+    <script defer src="quran-features.js"></script>
+    <script defer src="quran-audio.js"></script>
+    <script defer src="surah-audio.js"></script>
+    <script defer src="quran-library.js"></script>
+    <script defer src="audio-downloads.js"></script>
+    <script defer src="quran-v48.js"></script>
+    <script defer src="app-shell.js"></script>
+</head>
+<body id="app-body">
+    <a class="skip-link" href="#page-content">تخطي إلى المحتوى</a>
+
+    <div class="header-section">
+        <h1>زاد الذاكرين</h1>
+        <p id="current-date"></p>
+        <div id="current-theme"></div>
+
+        <!-- زر سريع لفتح لوحة الإدخال اليدوي للموقع -->
+        <button id="manual-toggle" style="margin-top:8px;padding:6px 10px;border-radius:8px;border:none;background:#f6bd26;color:#000;cursor:pointer;">
+            <i class="fas fa-map-marker-alt"></i> تحديد الموقع يدوياً
+        </button>
+    </div>
+
+    <main class="main-content">
+        <div id="page-content"></div>
+    </main>
+
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <nav class="bottom-nav">
+        <div class="nav-item active" data-tab="home">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </div>
+        <div class="nav-item" data-tab="adhkar">
+            <i class="fas fa-hands-praying"></i>
+            <span>الأذكار</span>
+        </div>
+        <div class="nav-item" data-tab="tasbeeh">
+            <i class="fas fa-circle-notch"></i>
+            <span>المسبحة</span>
+        </div>
+        <div class="nav-item" data-tab="quran">
+            <i class="fas fa-book-quran"></i>
+            <span>القرآن</span>
+        </div>
+        <div class="nav-item" data-tab="audio-quran">
+            <i class="fas fa-headphones"></i>
+            <span>المسموع</span>
+        </div>
+        <div class="nav-item" data-tab="settings">
+            <i class="fas fa-user-gear"></i>
+            <span>الإعدادات</span>
+        </div>
+    </nav>
+
+    <!-- لوحة الإدخال اليدوي (مخفية افتراضياً) -->
+    <div id="manual-location-panel" style="display:none; position:fixed; left:16px; right:16px; bottom:86px; z-index:9999;">
+        <div style="background:rgba(0,0,0,0.8); padding:14px; border-radius:12px; color:#fff; box-shadow:0 10px 30px rgba(0,0,0,0.6);">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+                <strong>إدخال الموقع يدوياً</strong>
+                <button id="manual-close" style="background:transparent;border:1px solid rgba(255,255,255,0.08);color:#fff;padding:6px 8px;border-radius:8px;cursor:pointer;">إغلاق</button>
+            </div>
+
+            <div style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap;">
+                <input id="manual-lat" placeholder="خط العرض (مثال: 24.7136)" type="number" step="0.0001"
+                       style="flex:1; min-width:160px; padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:#fff;">
+                <input id="manual-lon" placeholder="خط الطول (مثال: 46.6753)" type="number" step="0.0001"
+                       style="flex:1; min-width:160px; padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:#fff;">
+                <input id="manual-city" placeholder="المدينة (اختياري)" type="text"
+                       style="flex:1 0 220px; padding:8px; border-radius:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:#fff;">
+            </div>
+
+            <div style="display:flex; gap:8px; margin-top:12px;">
+                <button id="save-manual-btn" style="background:#2ecc71;border:none;color:#000;padding:8px 12px;border-radius:8px;cursor:pointer;">حفظ الموقع وتحديث</button>
+                <button id="clear-manual-btn" style="background:#e74c3c;border:none;color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;">إزالة الموقع اليدوي</button>
+                <div style="flex:1; align-self:center; color:#cbd6e1; font-size:0.85rem;">التحديث يحدث مرة يومياً أو عند الحفظ اليدوي</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+        window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(console.warn));
+      }
+    </script>
+</body>
+</html>
